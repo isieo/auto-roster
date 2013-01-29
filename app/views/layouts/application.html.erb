@@ -1,14 +1,48 @@
 <!DOCTYPE html>
-<html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-  <title>AutoRoster</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+	<meta charset="utf-8" />
+
+	<!-- Uncomment to make IE8 render like IE7 -->
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+	<!-- Set the viewport width to device width for mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+	<!-- Included CSS Files -->
+	<%= stylesheet_link_tag    "application" %>
+
+	<!-- Included JS Files  -->
+	<%= javascript_include_tag "application" %>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <!-- Header and Nav -->
 
+  <div class="row">
+    <div class="three columns">
+      <h1><img src="http://placehold.it/400x100&text=Logo" /></h1>
+    </div>
+    <div class="nine columns">
+      <ul class="nav-bar right">
+        <li><%=link_to("My Organizations",organizations_path)%></li>
+        <%if current_organization%>
+          <li><%=link_to("#{current_organization.name}'s Calendar",organization_calendar_path(current_organization))%></li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+
+  <!-- End Header and Nav -->
+
+  <%= yield %>
 </body>
 </html>
