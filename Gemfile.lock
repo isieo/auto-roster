@@ -66,6 +66,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
+    modernizr-rails (2.6.1)
     modular-scale (1.0.6)
       compass (>= 0.12.1)
       sass (>= 3.2.0)
@@ -145,6 +146,7 @@ DEPENDENCIES
   compass-rails
   devise
   jquery-rails
+  modernizr-rails
   mongoid (~> 3.0.0)
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_time: 2013-01-29 17:50:08
+  available_for: 1
+
+two:
+  start_time: 2013-01-29 17:50:08
+  available_for: 1

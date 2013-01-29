@@ -1,9 +1,9 @@
 AutoRoster::Application.routes.draw do
-  resources :schedules
 
   resources :organizations do
     get "calendar" => "calendar#index"
     resources :roles
+    resources :schedules
   end
 
 
@@ -58,7 +58,7 @@ AutoRoster::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'calendars#index'
+  root :to => 'organizations#index'
 
   # See how all your routes lay out with "rake routes"
 

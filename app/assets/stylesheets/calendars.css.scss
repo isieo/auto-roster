@@ -1,0 +1,29 @@
+// Place all the styles related to the Calendars controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+td.hours {
+  background-color: #555;
+  padding: 0;
+  position: relative;
+}
+
+div.scheduled-time:hover:after {
+  content: attr(data-tooltip);
+  position: absolute;
+  white-space: nowrap;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 3px 7px; color: #FFF;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-left: -70px;
+  margin-top: -30px;
+}
+
+div.scheduled-time{
+  position: absolute;
+  white-space: nowrap;
+  background: #33F;
+  height: 36px;
+}

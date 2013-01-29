@@ -1,0 +1,58 @@
+
+
+
+  <div class="row">
+
+    <div class="twelve columns">
+      <table class="twelve">
+        <thead>
+          <tr>
+            <th>
+              Member
+            </th>
+            <% 7.times do |i|%>
+            <th><%=(Time.now + i.days).day%> <%=Date::MONTHNAMES[(Time.now + i.days).month]%></th>
+            <% end%>
+          </tr>
+        </thead>
+        <tbody>
+          <%@organization.users.all.each do |u|%>
+          <tr>
+            <td><%=u.name%></td>
+            <td class="hours" colspan="7">
+              <%u.schedules.where(:organization_id=>@organization.id,:start_time.gt => Time.now.in_time_zone(Time.zone).beginning_of_day, :start_time.lt => Time.now + 7.day ).each do |s|%>
+                <div class="schedule"
+                  data-start-time="<%=(s.start_time - DateTime.now.in_time_zone(Time.zone).beginning_of_day)/30.minutes%>"
+                  data-end-time="<%=s.available_for*2%>"
+                  data-tooltip="<%=s.start_time%> to <%=s.start_time + s.available_for.hours%>"></div>
+              <%end%>
+            </td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+
+
+
+      <h3>My Schedules</h3>
+      <%= link_to 'New Schedule', new_organization_schedule_path(@organization) %>
+      <table>
+        <tr>
+          <th>Start time</th>
+          <th>Available for</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      <% current_user.schedules.where( :organization_id=>@organization.id).each do |schedule| %>
+        <tr>
+          <td><%= schedule.start_time %></td>
+          <td><%= schedule.available_for %></td>
+          <td><%= link_to 'Edit', edit_organization_schedule_path(@organization,schedule) %></td>
+          <td><%= link_to 'Remove', organization_schedule_path(@organization,schedule), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      </table>
+
+    </div>
+  </div>

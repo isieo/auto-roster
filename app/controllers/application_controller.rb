@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_timezone
-    Time.zone = "Kuala Lumpur"
+    if current_user && current_user.time_zone
+      Time.zone = current_user.time_zone
+    else
+      Time.zone = "GMT"
+    end
   end
 end
