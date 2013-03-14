@@ -2,7 +2,8 @@ class SchedulesController < ApplicationController
   before_filter :set_organization
 
   def set_organization
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.where(id: params[:organization_id]).first
+    @organization = Organization.where(name: params[:organization_id]).first if !@organization
   end
   # GET /schedules
   # GET /schedules.json
@@ -45,8 +46,7 @@ class SchedulesController < ApplicationController
   # POST /schedules
   # POST /schedules.json
   def create
-    @schedule = current_user.schedules.new(params[:schedule])
-    @schedule.organization_id = @organization.id
+    @schedule = @organization.schedules.new(params[:schedule])
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to organization_calendar_path(@organization), notice: 'Schedule was successfully created.' }

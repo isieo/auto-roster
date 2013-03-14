@@ -13,7 +13,9 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
-    @organization = Organization.find(params[:id])
+    @organization = Organization.where(id: params[:id]).first
+    @organization = Organization.where(name: params[:id]).first if !@organization
+
     redirect_to(organization_calendar_path(@organization))
   end
 
@@ -37,10 +39,8 @@ class OrganizationsController < ApplicationController
   # POST /organizations
   # POST /organizations.json
   def create
-    params[:organization][:roles] = params[:organization][:roles].split(",").collect{|r| r.strip!;r} if params[:organization][:roles]
 
     @organization = Organization.new(params[:organization])
-    @organization.admins << current_user.id
     respond_to do |format|
       if @organization.save
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
@@ -79,5 +79,8 @@ class OrganizationsController < ApplicationController
       format.html { redirect_to organizations_url }
       format.json { head :no_content }
     end
+  end
+
+  def empty
   end
 end

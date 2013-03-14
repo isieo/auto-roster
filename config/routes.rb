@@ -1,13 +1,12 @@
 AutoRoster::Application.routes.draw do
 
+
   resources :organizations do
     get "calendar" => "calendar#index"
     resources :roles
     resources :schedules
   end
 
-
-  devise_for :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -58,7 +57,7 @@ AutoRoster::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'organizations#index'
+  root :to => 'organizations#empty'
 
   # See how all your routes lay out with "rake routes"
 

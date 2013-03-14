@@ -5,6 +5,7 @@ class CalendarController < ApplicationController
   end
 
   def set_organization
-    @organization = Organization.find(params[:organization_id])
+    @organization = Organization.where(id: params[:organization_id]).first
+    @organization = Organization.where(name: params[:organization_id]).first if !@organization
   end
 end

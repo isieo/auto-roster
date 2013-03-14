@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_filter :authenticate_user!
   protect_from_forgery
   before_filter :set_timezone
   helper_method :current_organization
@@ -12,8 +11,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_timezone
-    if current_user && current_user.time_zone
-      Time.zone = current_user.time_zone
+    if cookies[:time_zone]
+      Time.zone = cookies[:time_zone]
     else
       Time.zone = "GMT"
     end

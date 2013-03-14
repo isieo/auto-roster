@@ -7,6 +7,7 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
+      <%= f.input :member %>
       <%= f.input :start_time, input_html: {:type=>:datetime}, placeholder: "YYYY-MM-DD HH:MM:SS GMT+X:XX", hint: "You can specify your time zone here. Format YYYY-MM-DD HH:MM:SS GMT+X:XX" %>
       <%= f.input :available_for, :label=> "Hours Available" %>
     </div>
